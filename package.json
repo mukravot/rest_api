@@ -1,0 +1,23 @@
+{
+  "name": "rest_api",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">Почему данное README.md так не похоже на остальные.</h1> Я хотел не просто показать, что у меня был опыт написания \"витрины\" проекта, но поделиться тем путем, которым шел, выполняя тестовое задание. Считаю, что среди софт-скилов имеет место <em>быть!</em> умение излагать свои мысли. Хотя бы для того, чтобы оформлять понятную документацию к разрабатываемому продукту. По мере того, как будет изменяться код, будет также дополняться/изменяться данный README-файл, оформленный в виде отдельного commit'a.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mukravot/rest_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mukravot/rest_api/issues"
+  },
+  "homepage": "https://github.com/mukravot/rest_api#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
