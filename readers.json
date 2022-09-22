@@ -1,0 +1,44 @@
+[ {
+    "id":1,
+    "firstName":"Eric",
+    "lastName":"Adams",
+    "age":24,
+    "isFree":true,
+    "createdAt":"2022-03-25",
+    "updatedAt":"2022-03-27",
+    "Books":[{
+        "id":43,
+        "title":"Introduction to Algorithms",
+        "author":"Thomas H. Cormen",
+        "createdAt":"2022-03-25"}]
+ },
+ {
+    "id":2,
+    "firstName":"Nicola",
+    "lastName":"Young",
+    "age":33,
+    "isFree":true,
+    "createdAt":"2022-04-22",
+    "updatedAt":"2022-04-23",
+    "Books":[{
+        "id":13,
+        "title":"Clean Code: A Handbook of Agile Software Craftsmanship",
+        "author":"Robert C. Martin",
+        "createdAt":"2022-04-23"}
+    ]
+ },
+ {
+    "id":3,
+    "firstName":"Bryden",
+    "lastName":"Lewis",
+    "age":40,
+    "isFree":true,
+    "createdAt":"2022-05-02",
+    "updatedAt":"2022-05-10",
+    "Books":[{
+        "id":12,
+        "title":"The Pragmatic Programmer",
+        "author":" Andrew Hunt, David Thomas",
+        "createdAt":"2022-05-10"}
+    ]
+ }]
