@@ -67,7 +67,14 @@ app.post("/api/readers", jsonParser, function (req, res) {
     // находим максимальный id
     const id = Math.max.apply(Math,readers.map(function(o){return o.id;}))
     // увеличиваем его на единицу
-    reader.id = id+1;
+    //reader.id = id+1;
+    if (id == -Infinity) {
+        reader.id = 1;
+        //console.log(id);
+    } else {
+        reader.id = id+1;
+        //console.log(id);
+    }
     // добавляем пользователя в массив
     readers.push(reader);
     data = JSON.stringify(readers);

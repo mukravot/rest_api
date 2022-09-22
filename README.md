@@ -46,15 +46,16 @@ console.log(reader["Books"][0]["id"]);
 
 # Поехали
 ```bash
-sudo apt update && sudo apt upgrade
-sudo apt install nodejs npm git
-git clone https://github.com/mukravot/rest_api.git
-cd rest_api
-npm install express
-node app.js
+$ sudo apt update && sudo apt upgrade
+$ sudo apt install nodejs npm git
+$ git clone https://github.com/mukravot/rest_api.git
+$ cd rest_api
+$ npm install express
+$ node apps.js
 ```
-В браузере по адресу: http://localhost:3000 доступен результат работы. Profit! :ok_hand:    :sunglasses:    
-
+В браузере по адресу: http://localhost:3000 доступен результат работы. Profit! :ok_hand: :sunglasses:
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 # Второй коммит
 "Старое" приложение, которое послужило основой для выполнения задания все также доступно из папки проект REST_API. Запускается командой из терминала: 
@@ -79,3 +80,30 @@ $ node app1
      "createdAt": "2022-03-25",
      "updatedAt": "2022-03-27",
 }
+```
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+# Третий коммит
+Заметил не приятный баг в программе. Если в файле нет данных, то добавление первого элемента массива формирутся с ошибкой, а именно, ключу `reader.id` присваивается значение `null`.
+<a href="https://ibb.co/7rTtrBb"><img src="https://i.ibb.co/xzcqzw3/1st-el.png" alt="1st-el" border="0"></a>
+
+Т.к. из формы не смог передать в функцию нулевое значение id:
+
+```html
+if (id == 0)
+    CreateUser(firstName, lastName, age, isFree, createdAt, updatedAt);
+```
+поэтому в саму функцию добавил проверку на `-Infinity`
+```js
+if (id == -Infinity) {
+        reader.id = 1;
+    } else {
+        reader.id = id+1;
+    }
+```
+### Как проверить?
+Затрем файл с данными пустым массивом и откроем веб-страницу http://localhost:3001/, предварительно запустив сервер.
+```bash
+$ echo -n "[]" > readers.json
+$ node app1
+```
