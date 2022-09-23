@@ -6,11 +6,12 @@
     "isFree":true,
     "createdAt":"2022-03-25",
     "updatedAt":"2022-03-27",
-    "Books":[{
-        "id":43,
-        "title":"Introduction to Algorithms",
-        "author":"Thomas H. Cormen",
-        "createdAt":"2022-03-25"}]
+    "Books":[
+        {"id":43,
+        "title":"Eloquent JavaScript, 3rd edition (2018)",
+        "author":"Marijn Haverbeke",
+        "createdAt":"2022-01-02"}
+    ]
  },
  {
     "id":2,
@@ -20,11 +21,15 @@
     "isFree":true,
     "createdAt":"2022-04-22",
     "updatedAt":"2022-04-23",
-    "Books":[{
-        "id":13,
-        "title":"Clean Code: A Handbook of Agile Software Craftsmanship",
-        "author":"Robert C. Martin",
-        "createdAt":"2022-04-23"}
+    "Books":[
+        {"id":11,
+        "title":"You Don't Know JS Yet: Scope & Closures - 2nd Edition",
+        "author":"Kyle Simpson",
+        "createdAt":"2022-03-30"},
+        {"id":12,
+        "title":"Effective JavaScript 68 Specific Ways to Harness",
+        "author":"David Herman",
+        "createdAt":"2022-08-23"}
     ]
  },
  {
@@ -35,8 +40,16 @@
     "isFree":true,
     "createdAt":"2022-05-02",
     "updatedAt":"2022-05-10",
-    "Books":[{
-        "id":12,
+    "Books":[
+        {"id":3,
+        "title":"Introduction to Algorithms",
+        "author":"Thomas H. Cormen",
+        "createdAt":"2022-03-25"},
+        {"id":11,
+        "title":"Clean Code: A Handbook of Agile Software Craftsmanship",
+        "author":"Robert C. Martin",
+        "createdAt":"2022-04-23"},
+        {"id":15,
         "title":"The Pragmatic Programmer",
         "author":" Andrew Hunt, David Thomas",
         "createdAt":"2022-05-10"}

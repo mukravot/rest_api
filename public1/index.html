@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Список пользователей</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
+
 <body>
     <h2>Список пользователей</h2>
     <form name="userForm">
@@ -34,19 +36,41 @@
             <label for="name">Обновлен:</label>
             <input class="form-control" name="updatedAt" />
         </div>
+        <table class="table table-condensed table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Книга</th>
+                    <th>Автор</th>
+                    <th>Создан</th>
+                </tr>
+            </thead>
+            <tbody id="table_of_books">
+            </tbody>
+        </table>
         <div class="panel-body">
             <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
             <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
         </div>
     </form>
     <table class="table table-condensed table-striped table-bordered">
-        <thead><tr><th>Id</th><th>Имя</th><th>Фамилия</th><th>Возраст</th><th>Статус</th><th>Создан</th><th>Обновлен</th><th></th></tr></thead>
-        <tbody>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Возраст</th>
+                <th>Статус</th>
+                <th>Создан</th>
+                <th>Обновлен</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="table_of_users">
         </tbody>
     </table>
-   
     <script>
-    // Получение всех пользователей
+        // Получение всех пользователей
         async function GetUsers() {
             // отправляет запрос и получаем ответ
             const response = await fetch("/api/readers", {
@@ -57,8 +81,9 @@
             if (response.ok === true) {
                 // получаем данные
                 const readers = await response.json();
-                let rows = document.querySelector("tbody"); 
+                let rows = document.getElementById('table_of_users');
                 readers.forEach(reader => {
+                    //alert(reader.id);
                     // добавляем полученные элементы в таблицу
                     rows.append(row(reader));
                 });
@@ -80,11 +105,21 @@
                 form.elements["isFree"].value = reader.isFree;
                 form.elements["createdAt"].value = reader.createdAt;
                 form.elements["updatedAt"].value = reader.updatedAt;
+                //Заполняем таблицу с книгами для конкретного чтеца
+                let rows1 = document.getElementById('table_of_books');
+                if (reader.Books.length > 0) {
+                    var counter = 0;
+                    for (var key in reader.Books) {
+                        rows1.append(row1(reader, counter));
+                        counter++;
+                    }
+
+                }
             }
         }
         // Добавление пользователя
         async function CreateUser(firstName, lastName, userAge, isFree, createdAt, updatedAt) {
-  
+
             const response = await fetch("api/readers", {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
@@ -98,7 +133,7 @@
                 })
             });
             if (response.ok === true) {
-                const reader= await response.json();
+                const reader = await response.json();
                 reset();
                 document.querySelector("tbody").append(row(reader));
             }
@@ -135,23 +170,24 @@
                 document.querySelector("tr[data-rowid='" + reader.id + "']").remove();
             }
         }
-  
+
         // сброс формы
         function reset() {
             const form = document.forms["userForm"];
             form.reset();
             form.elements["id"].value = 0;
         }
+
         // создание строки для таблицы
         function row(reader) {
-  
+
             const tr = document.createElement("tr");
             tr.setAttribute("data-rowid", reader.id);
-  
+            //alert(reader.id);
             const idTd = document.createElement("td");
             idTd.append(reader.id);
             tr.append(idTd);
-  
+
             const nameTd = document.createElement("td");
             nameTd.append(reader.firstName);
             tr.append(nameTd);
@@ -159,7 +195,7 @@
             const surnameTd = document.createElement("td");
             surnameTd.append(reader.lastName);
             tr.append(surnameTd);
-  
+
             const ageTd = document.createElement("td");
             ageTd.append(reader.age);
             tr.append(ageTd);
@@ -175,42 +211,69 @@
             const updatedAt = document.createElement("td");
             updatedAt.append(reader.updatedAt);
             tr.append(updatedAt);
-              
+
             const linksTd = document.createElement("td");
-  
+
             const editLink = document.createElement("a");
             editLink.setAttribute("data-id", reader.id);
             editLink.setAttribute("style", "cursor:pointer;padding:15px;");
             editLink.append("Изменить");
             editLink.addEventListener("click", e => {
-  
+                
                 e.preventDefault();
+                //alert("Alert!")
                 GetUser(reader.id);
             });
             linksTd.append(editLink);
-  
+
             const removeLink = document.createElement("a");
             removeLink.setAttribute("data-id", reader.id);
             removeLink.setAttribute("style", "cursor:pointer;padding:15px;");
             removeLink.append("Удалить");
             removeLink.addEventListener("click", e => {
-  
+
                 e.preventDefault();
                 DeleteUser(reader.id);
             });
-  
+
             linksTd.append(removeLink);
             tr.appendChild(linksTd);
-  
+
             return tr;
         }
+
+        // создание строки для таблицы с книгами
+        function row1(reader, i) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", reader.id);
+            
+            const idTd = document.createElement("td");
+            idTd.append(reader.Books[i].id);
+            tr.append(idTd);
+
+            const nameTd = document.createElement("td");
+            nameTd.append(reader.Books[i].title);
+            tr.append(nameTd);
+
+            const surnameTd = document.createElement("td");
+            surnameTd.append(reader.Books[i].author);
+            tr.append(surnameTd);
+
+            const createdAt = document.createElement("td");
+            createdAt.append(reader.Books[i].createdAt);
+            tr.append(createdAt);
+
+            return tr;
+        }
+
         // сброс значений формы
         document.getElementById("reset").click(function (e) {
-  
+
             e.preventDefault();
             reset();
         })
-  
+
         // отправка формы
         document.forms["userForm"].addEventListener("submit", e => {
             e.preventDefault();
@@ -227,9 +290,10 @@
             else
                 EditUser(id, firstName, lastName, age, isFree, createdAt, updatedAt);
         });
-  
+
         // загрузка пользователей
         GetUsers();
     </script>
 </body>
+
 </html>
