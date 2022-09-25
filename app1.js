@@ -1,6 +1,8 @@
 const express = require("express");
 const fs = require("fs");
 
+const port = process.env.PORT || 3001
+
 const app = express();
 const jsonParser = express.json();
 
@@ -151,6 +153,6 @@ app.put("/api/readers", jsonParser, function(req, res){
     }
 });
 
-app.listen(3001, function(){
-    console.log("Сервер ожидает подключения...");
+app.listen(port, () => {
+    console.log('Server started on port:', port);
 });
